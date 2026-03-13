@@ -7,4 +7,4 @@ router.post("/", createEvent);
 router.put('/:id', updateEvent);
 router.delete('/:id', deleteEvent);
 
-export default router;
+module.exports = router;
