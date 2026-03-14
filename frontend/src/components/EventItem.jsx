@@ -1,5 +1,5 @@
 import React from 'react';
-import { updateEvent, deleteEvent } from '../services/api';
+import { updateEvent, deleteEvent } from '../service/api';
 
 const EventItem = ({ event, refresh }) => {
 

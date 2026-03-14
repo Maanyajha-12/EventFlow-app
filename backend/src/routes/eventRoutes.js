@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllEvents, createEvent, updateEvent, deleteEvent } = require('../controllers/notesControllers.js')
+const { getAllEvents, createEvent, updateEvent, deleteEvent } = require('../controllers/eventControllers.js')
 const router = express.Router();
 
 router.get("/", getAllEvents);
