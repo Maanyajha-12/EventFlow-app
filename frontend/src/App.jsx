@@ -9,19 +9,21 @@ import './App.css';
 function App() {
   const [events, setEvents] = useState([]);
 
-  const load = async () => {
+  const loadEvents = async () => {
     const res = await getAllEvents();
     setEvents(res.data);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { loadEvents(); }, []);
 
   return (
     <div className="container">
-      <h1>EventFlow</h1>
-      <EventForm onEventAdded={load} />
-      <div className="grid">
-        {events.map(e => <EventItem key={e.id} event={e} refresh={load} />)}
+      <h1>Event  Flow</h1>
+      <EventForm onEventAdded={loadEvents} />
+      <div className="event-grid">
+        {events.map(event => (
+          <EventItem key={event.id} event={event} refresh={loadEvents} />
+        ))}
       </div>
     </div>
   );

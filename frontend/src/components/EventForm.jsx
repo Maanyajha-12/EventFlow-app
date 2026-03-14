@@ -14,7 +14,7 @@ const EventForm = ({ onEventAdded }) => {
   return (
     <form className="event-form" onSubmit={handleSubmit}>
       <input placeholder="Event Name" value={name} onChange={e => setName(e.target.value)} required />
-      <input placeholder="Budget ($)" type="number" value={budget} onChange={e => setBudget(e.target.value)} required />
+      <input placeholder="Budget (INR)" type="number" value={budget} onChange={e => setBudget(e.target.value)} required />
       <button type="submit">Create Event</button>
     </form>
   );

@@ -3,8 +3,8 @@ import { updateEvent, deleteEvent } from '../service/api';
 
 const EventItem = ({ event, refresh }) => {
 
-    const totalSpent = event.expenses?.reduce((sum, item) => sum + item.cost, 0) || 0;
-    const remaining = event.initialBudget - totalSpent;
+    const totalSpent = event.expenses?.reduce((sum, item) => sum + (Number(item.cost, 0))) || 0;
+    const remaining = (event.initialBudget || 0) - totalSpent;
 
     const handleAddExpense = async () => {
         const expName = prompt("Expense Name:");
@@ -15,21 +15,7 @@ const EventItem = ({ event, refresh }) => {
         const updatedExpenses = [...(event.expenses || []), newExpense];
 
         await updateEvent(event.id, {
-            expenses: updatedExpenses,
-            tasks: event.tasks || []
-        });
-        refresh();
-    };
-
-    const handleAddTask = async () => {
-        const taskName = prompt("New Task:");
-        if (!taskName) return;
-
-        const updatedTasks = [...(event.tasks || []), { text: taskName, done: false }];
-
-        await updateEvent(event.id, {
-            expenses: event.expenses || [],
-            tasks: updatedTasks
+            expenses: updatedExpenses
         });
         refresh();
     };
@@ -42,26 +28,19 @@ const EventItem = ({ event, refresh }) => {
             </div>
 
             <div className="budget-box">
-                <p>Budget: ${event.initialBudget}</p>
-                <p className={remaining < 0 ? 'danger' : 'success'}>Left: ${remaining}</p>
+                <p>Budget: INR{event.initialBudget}</p>
+                <p className={remaining < 0 ? 'danger' : 'success'}>Left: INR {remaining}</p>
             </div>
 
             <div className="btn-group">
                 <button onClick={handleAddExpense}>+ Expense</button>
-                <button onClick={handleAddTask}>+ Task</button>
             </div>
 
             <div className="lists-container">
                 <div className="section">
                     <h4>Expenses</h4>
                     {event.expenses?.map((ex, i) => (
-                        <div key={i} className="list-item"><span>{ex.name}</span> <span>${ex.cost}</span></div>
-                    ))}
-                </div>
-                <div className="section">
-                    <h4>Tasks</h4>
-                    {event.tasks?.map((t, i) => (
-                        <div key={i} className="list-item">{t.text}</div>
+                        <div key={i} className="list-item"><span>{ex.name}</span> <span>INR {ex.cost}</span></div>
                     ))}
                 </div>
             </div>
