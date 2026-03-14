@@ -3,15 +3,19 @@ import { updateEvent, deleteEvent } from '../service/api';
 
 const EventItem = ({ event, refresh }) => {
 
-    const totalSpent = event.expenses?.reduce((sum, item) => sum + (Number(item.cost, 0))) || 0;
-    const remaining = (event.initialBudget || 0) - totalSpent;
+    const totalSpent = (event.expenses || []).reduce((sum, item) => sum + (Number(item.cost) || 0), 0);
+    const remaining = Number(event.initialBudget || 0) - totalSpent;
+
+    /*const totalSpent = (event.expenses || []).reduce(
+        (sum, item) => sum + Number(item.cost || 0), 0);
+    const remaining = Number(event.initialBudget || 0) - totalSpent;*/
 
     const handleAddExpense = async () => {
         const expName = prompt("Expense Name:");
-        const expCost = prompt("Cost:");
+        const expCost = Number(prompt("Cost:"));
         if (!expName || !expCost) return;
 
-        const newExpense = { name: expName, cost: Number(expCost) };
+        const newExpense = { name: expName, cost: expCost };
         const updatedExpenses = [...(event.expenses || []), newExpense];
 
         await updateEvent(event.id, {
@@ -28,7 +32,7 @@ const EventItem = ({ event, refresh }) => {
             </div>
 
             <div className="budget-box">
-                <p>Budget: INR{event.initialBudget}</p>
+                <p>Budget: INR {event.initialBudget}</p>
                 <p className={remaining < 0 ? 'danger' : 'success'}>Left: INR {remaining}</p>
             </div>
 

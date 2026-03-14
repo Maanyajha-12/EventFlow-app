@@ -9,9 +9,18 @@ import './App.css';
 function App() {
   const [events, setEvents] = useState([]);
 
-  const loadEvents = async () => {
+  /*const loadEvents = async () => {
     const res = await getAllEvents();
     setEvents(res.data);
+  };*/
+
+  const loadEvents = async () => {
+    try {
+      const res = await getAllEvents();
+      setEvents(res.data);
+    } catch (error) {
+      console.error("Failed to load events:", error);
+    }
   };
 
   useEffect(() => { loadEvents(); }, []);
