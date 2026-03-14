@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/events';
+const API_URL = 'https://eventflow-appbackend.onrender.com/api/events';
 //used to send http requests.frontend-axios request-backend api-firebase-return data
 
 export const getAllEvents = () => axios.get(API_URL);
