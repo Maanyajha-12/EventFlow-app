@@ -14,8 +14,8 @@ async function getAllEvents(req, res) {
 //create event funcction
 async function createEvent(req, res) {
   try {
-    const { name, budget } = req.body;
-    const newEvent = { name, initialBudget: Number(budget), expenses: [], tasks: [] };
+    const { name, initialBudget } = req.body;
+    const newEvent = { name, initialBudget: Number(initialBudget), expenses: [] };
     const docRef = await db.collection('events').add(newEvent);
     res.json({ id: docRef.id, ...newEvent });
   } catch (error) {
@@ -26,9 +26,9 @@ async function createEvent(req, res) {
 //update event and task
 async function updateEvent(req, res) {
   try {
-    const { expenses, tasks } = req.body;
+    const { expenses } = req.body;
     const eventRef = db.collection('events').doc(req.params.id);
-    await eventRef.update({ expenses, tasks });
+    await eventRef.update({ expenses });
     res.json({ message: "Updated successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
