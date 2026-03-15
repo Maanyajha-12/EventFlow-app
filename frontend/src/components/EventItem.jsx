@@ -64,7 +64,7 @@ const EventItem = ({ event, refresh }) => {
             <div className="lists-container">
                 <div className="section">
                     <h4>Expenses</h4>
-                    {event.expenses?.map((ex, i) => (
+                    {(event.expenses || []).map((ex, i) => (
                         <div key={i} className="list-item"><span>{ex.name}</span> <span>INR {ex.cost}</span></div>
                     ))}
                 </div>
