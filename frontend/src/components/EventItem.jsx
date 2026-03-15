@@ -12,6 +12,27 @@ const EventItem = ({ event, refresh }) => {
 
     const handleAddExpense = async () => {
         const expName = prompt("Expense Name:");
+        const expCost = prompt("Cost:");
+
+        // Safety check: IT ensure inputs exist and cost is a number
+        if (!expName || !expCost) return;
+
+        // Created an updated array by spreading existing expenses and adding the new one
+        const updatedExpenses = [...(event.expenses || []), { expName, cost: Number(cost) }];
+
+        try {
+            // This sends the full update to our Render backend
+            await updateEvent(event.id, {
+                expenses: updatedExpenses
+            });
+            refresh(); // This re-fetches data from the DB so the UI updates
+        } catch (err) {
+            console.error("Update failed:", err);
+        }
+    };
+
+    /*const handleAddExpense = async () => {
+        const expName = prompt("Expense Name:");
         const expCost = Number(prompt("Cost:"));
         if (!expName || !expCost) return;
 
@@ -22,7 +43,7 @@ const EventItem = ({ event, refresh }) => {
             expenses: updatedExpenses
         });
         refresh();
-    };
+    };*//*old handle function*/
 
     return (
         <div className="event-card">
