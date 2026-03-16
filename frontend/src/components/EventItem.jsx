@@ -17,7 +17,7 @@ const EventItem = ({ event, refresh }) => {
         if (!expName || !expCost) return;
 
         // Created an updated array by spreading existing expenses and adding the new one
-        const updatedExpenses = [...(event.expenses || []), { expName, cost: Number(cost) }];
+        const updatedExpenses = [...(event.expenses || []), { expName, cost: Number(expCost) }];
 
         try {
             // This sends the full update to our Render backend
@@ -64,7 +64,7 @@ const EventItem = ({ event, refresh }) => {
                 <div className="section">
                     <h4>Expenses</h4>
                     {(event.expenses || []).map((ex, i) => (
-                        <div key={i} className="list-item"><span>{ex.name}</span> <span>INR {ex.cost}</span></div>
+                        <div key={i} className="list-item"><span>{ex.expName}</span> <span>INR {ex.expCost}</span></div>
                     ))}
                 </div>
             </div>
