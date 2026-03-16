@@ -7,7 +7,7 @@ const EventForm = ({ onEventAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createEvent({ name, budget: Number(budget) });
+    await createEvent({ name, initialBudget: Number(budget) });
     setName(''); setBudget(''); onEventAdded();
   };
 

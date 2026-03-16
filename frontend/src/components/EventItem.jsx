@@ -2,7 +2,6 @@ import React from 'react';
 import { updateEvent, deleteEvent } from '../service/api';
 
 const EventItem = ({ event, refresh }) => {
-
     const totalSpent = (event.expenses || []).reduce((sum, item) => sum + (Number(item.cost) || 0), 0);
     const remaining = Number(event.initialBudget || 0) - totalSpent;
 
@@ -11,10 +10,10 @@ const EventItem = ({ event, refresh }) => {
     const remaining = Number(event.initialBudget || 0) - totalSpent;*/
 
     const handleAddExpense = async () => {
-        const expName = prompt("Expense Name:");
-        const expCost = prompt("Cost:");
+        const expName = prompt("Enter Expense Name:");
+        const expCost = prompt("Enter Cost:");
 
-        // Safety check: IT ensure inputs exist and cost is a number
+        // Safety check: IT ensure inputs exist and cost is a number and no empty data is sent to database
         if (!expName || !expCost) return;
 
         // Created an updated array by spreading existing expenses and adding the new one
