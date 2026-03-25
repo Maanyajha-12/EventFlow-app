@@ -10,7 +10,7 @@ h1 {
   font-size: 2.5rem;
 }
 
-/* Form Inputs - Fixing the "Invisible Text" */
+
 .event-form {
   background: #1e293b;
   padding: 20px;
@@ -28,13 +28,11 @@ h1 {
   padding: 12px;
   border-radius: 8px;
   color: #ffffff !important;
-  /* Force text to be white */
   font-size: 1rem;
 }
 
 .event-form button {
   background: #2563eb;
-  /* Bright Blue */
   color: white;
   border: none;
   padding: 12px 24px;
@@ -67,12 +65,10 @@ h1 {
 
 .card-header h3 {
   color: #ffffff !important;
-  /* Force Titles to show */
   font-size: 1.5rem;
   margin: 0;
 }
 
-/* Budget Section */
 .budget-box {
   display: flex;
   justify-content: space-between;
@@ -85,7 +81,7 @@ h1 {
 
 .budget-box p {
   color: #e6ebf1;
-  /* Light gray for labels */
+
   font-weight: 600;
 }
 
@@ -95,6 +91,21 @@ h1 {
 
 .danger {
   color: #f87171 !important;
+}
+
+.budget-warning {
+  background-color: #ffe5e5;
+  color: #cc0000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin: 8px 0;
+  border-left: 4px solid #cc0000;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* Buttons inside Cards */
@@ -120,11 +131,7 @@ h1 {
   background: #475569;
 }
 
-/* Expenses & Tasks Lists */
-.list-section {
-  border-top: 1px solid #334155;
-  padding-top: 15px;
-}
+/* Expenses */
 
 .list-item {
   display: flex;

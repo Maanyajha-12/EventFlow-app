@@ -10,11 +10,23 @@ const EventItem = ({ event, refresh }) => {
     const remaining = Number(event.initialBudget || 0) - totalSpent;*/
 
     const handleAddExpense = async () => {
+
+        if (remaining < 0) {
+            alert("Budget already exceeded! Cannot add more expenses.");
+            return;
+        }
         const expName = prompt("Enter Expense Name:");
         const expCost = prompt("Enter Cost:");
 
         // Safety check: IT ensure inputs exist and cost is a number and no empty data is sent to database
         if (!expName || !expCost) return;
+
+        if (Number(expCost) > remaining) {
+            const confirmed = window.confirm(
+                `This expense (INR ${expCost}) exceeds your remaining budget (INR ${remaining}). Add anyway?`
+            );
+            if (!confirmed) return;
+        }
 
         // Created an updated array by spreading existing expenses and adding the new one
         const updatedExpenses = [...(event.expenses || []), { name: expName, cost: Number(expCost) }];
@@ -55,6 +67,11 @@ const EventItem = ({ event, refresh }) => {
                 <p>Budget: INR {event.initialBudget}</p>
                 <p className={remaining < 0 ? 'danger' : 'success'}>Left: INR {remaining}</p>
             </div>
+            {remaining < 0 && (
+                <div className="budget-warning">
+                    Over budget by INR {Math.abs(remaining)}!
+                </div>
+            )}
 
             <div className="btn-group">
                 <button onClick={handleAddExpense}>+ Expense</button>

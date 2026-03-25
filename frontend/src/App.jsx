@@ -14,6 +14,7 @@ function App() {
     setEvents(res.data);
   };*/
 
+  //load event function
   const loadEvents = async () => {
     try {
       const res = await getAllEvents();

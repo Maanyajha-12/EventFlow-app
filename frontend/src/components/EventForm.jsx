@@ -8,8 +8,14 @@ const EventForm = ({ onEventAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createEvent({ name, initialBudget: Number(budget) });
-    setName(''); setBudget(''); onEventAdded();
-  };
+    setName('');
+    setBudget('');
+    onEventAdded();
+  };//runs when the form is submitted
+  //this prevent default reload of page upon submitting
+  //call backend api
+  //reset the form
+  //notify parent onEventAdded
 
   return (
     <form className="event-form" onSubmit={handleSubmit}>
